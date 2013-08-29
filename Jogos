@@ -1,0 +1,149 @@
+import java.util.Scanner;
+import javax.swing.*;
+
+
+//Implementar em JAVA: Um jogo em console, cujo objetivo do jogador é atravessar um vetor de 10 unidades de distância.
+//Os comandos disponíveis são: Avancar, voltar, carregar e descarregar. So pode carregar se existir combustível, na posição zero o estoque é infinito
+//Ganha o jogo chegando na última posição, perde o jogo se ficar sem poder andar, cada vez que anda gasta um combustível,tamanho do tanque é 6.
+
+public class Jogos {
+
+	private int vet[];
+	private int combustivel;
+	private int caminhao;
+	private int largar;
+	private int posicao;
+	private int avancar;
+	private int voltar;
+
+	public Jogos(){
+		vet = new int[10];
+		combustivel = 6;
+		caminhao = 0;
+		largar = 0;
+		posicao = 0;
+		avancar = 0;
+		voltar =0;
+
+	}
+	public void lerVetor(){
+
+		vet[0] = 1;
+		vet[1] = 2;
+		vet[2] = 3;
+		vet[3] = 4;
+		vet[4] = 5;
+		vet[5] = 6;
+		vet[6] = 7;
+		vet[7] = 8;
+		vet[8] = 9;
+		vet[9] = 10;
+	}
+
+	public void comecarJogo(){
+		posicao = 0;
+		combustivel = 6;
+		
+		System.out.println(" *Posiçao :  " + caminhao);
+		System.out.println(" *Tanque  :  " + combustivel);
+		System.out.println(" ");
+		
+		
+	}
+	public void avancar() {
+		
+			System.out.println("Você deseja avancar quantas posições? ");
+			Scanner teclado = new Scanner(System.in);
+			avancar = teclado.nextInt();
+			combustivel = combustivel- avancar;
+				
+				posicao = avancar + posicao;
+				System.out.println("avancou  " + posicao + " Posicao = " + posicao);
+				 
+				System.out.println("Tanque:" + combustivel);
+			
+				if (combustivel <= 0  ){
+						System.out.println(" Você perdeu!");
+				}
+				if (posicao == 10 && combustivel >0 ) {
+						System.out.println(" Você ganhou!");
+				}
+		}
+	public void voltar(){
+		
+		System.out.println("Você deseja voltar quantas posições? ");
+			Scanner teclado = new Scanner(System.in);
+			voltar = teclado.nextInt();
+			combustivel = combustivel - voltar;
+			posicao =  posicao - voltar;
+				
+		System.out.println("voltou " + posicao + " Posicao = " + posicao);
+		System.out.println("Tanque:" + combustivel);
+		
+		if(posicao > 0 && combustivel > 0){
+			combustivel = combustivel + 6;
+		}
+	}
+	public void abastecer() {
+		
+
+
+		}
+	public void largar() {
+		System.out.println("Quantos deseja largar ?");
+		Scanner teclado = new Scanner(System.in);
+		largar = teclado.nextInt();
+			if (combustivel >0 && combustivel <10)
+				combustivel = combustivel - largar;
+				System.out.println("Largou =" + largar);
+				System.out.println("restante do Tanque" + combustivel);
+
+
+	}
+
+}
+import java.util.Scanner;
+
+	public class Principal {
+		public static void main(String[] args) {
+
+			Jogos obj = new Jogos();
+			int op;
+	
+			do {
+				System.out.println("                     **    - MENU -  **               ");
+				System.out.println(" ");
+				System.out.println("                   | - 1 Começar Status   :");
+				System.out.println("                   | - 2 Avancar          :");
+				System.out.println("                   | - 3 Voltar           :");
+				System.out.println("                   | - 4 Abastecer        :");
+				System.out.println("                   | - 5 Largar           :");
+				
+				System.out.println(" ");
+			
+		
+				Scanner teclado = new Scanner(System.in);
+				op = teclado.nextInt();
+				
+				switch(op){
+				case 1:obj.comecarJogo();
+					break;
+				case 2:		
+					obj.avancar();
+					break;
+				case 3:
+					obj.voltar();
+					break;
+				case 4:
+					obj.abastecer();
+					break;
+				case 5:
+					obj.largar();
+					break;
+				case 6: 
+					System.exit(0);
+					break;
+				}	
+			} while (op != 6);		
+		}
+	}
